@@ -5,7 +5,7 @@
 
 
     @foreach ($categories as $category)
-        @if ($category->design == 1)
+        @if ($category->design == 1 && $category->getFirstMedia())
             <x-category-header.main1 :$category />
         @else
             <x-category-header.main2 :$category />
