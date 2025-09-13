@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cupcake">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <title>{{-- {{ $title ?? 'Page Title' }} --}}Good Morning</title>
+    <title>Good Morning | Fresh Desserts & Drinks in Aley, Lebanon</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="description"
+        content="Good Morning in Aley, Lebanon – your destination for freshly made desserts, drinks, and pastries served all day, every day since 2011. Enjoy cakes, juices, and sweet delights crafted fresh with every sunrise and beyond.">
+    <meta name="keywords"
+        content="Good Morning Aley, fresh desserts Lebanon, daily fresh drinks Aley, dessert shop Lebanon, coffee and desserts Aley, fresh juices Lebanon, cakes and pastries Aley, best desserts in Lebanon, Good Morning café Aley, freshly made desserts daily">
+
+    <!-- Open Graph (Facebook/WhatsApp) -->
+    <meta property="og:title" content="Good Morning | Fresh Desserts & Drinks in Aley, Lebanon">
+    <meta property="og:description"
+        content="Serving Aley with freshly prepared desserts, drinks, and pastries every day since 2011. Fresh with every sunrise.">
+    <meta property="og:image" content="{{ asset('images/GMLogo2025.png') }}">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,7 +30,7 @@
 <body class="poppins">
     <x-nav.main />
     {{ $slot }}
-    <x-footer.main />
+
 </body>
 
 </html>

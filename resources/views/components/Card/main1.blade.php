@@ -1,19 +1,25 @@
 @props(['product'])
 
 <article
+    x-data="{ open: false }"
+    x-init="$watch('open', value => { if(value) { document.body.classList.add('overflow-hidden') } else { document.body.classList.remove('overflow-hidden') } })"
     class="card w-full bg-base-100 shadow-lg rounded-xl border border-base-200 hover:shadow-xl transition-all duration-300 overflow-hidden group"
-    itemscope itemtype="https://schema.org/Product">
+    itemscope itemtype="https://schema.org/Product"
+    @keydown.escape.window="open = false">
 
     <div class="flex items-center gap-3 p-3 relative">
+        <!-- Product Image -->
         @if ($product->getFirstMediaUrl())
             <figure
-                class="relative overflow-hidden {{ $product->featured ? 'ring-yellow-500' :'ring-green-800' }} ring-offset-base-100 rounded-full ring-2 ring-offset-2">
-                <img src="{{ $product->getFirstMediaUrl() }}" alt="{{ $product->name }}"
+                @click="open = true"
+                class="relative overflow-hidden cursor-pointer {{ $product->featured ? 'ring-yellow-500' :'ring-green-800' }} ring-offset-base-100 rounded-full ring-2 ring-offset-2">
+                <img loading="lazy" src="{{ $product->getFirstMediaUrl() }}" alt="{{ $product->name }}"
                     class="w-16 h-16 object-cover shadow group-hover:scale-110 transition-transform duration-300"
                     itemprop="image" />
             </figure>
         @endif
 
+        <!-- Product Info -->
         <div class="flex-1 min-w-0">
             <header class="flex justify-between items-start mb-1">
                 <h3 class="font-bold text-base truncate flex space-x-1 items-center" itemprop="name">
@@ -30,14 +36,13 @@
                 </h3>
 
                 @if ($product->price && !$product->variations)
-                    <span class="badge badge-neutral badge-sm font-semibold ml-2" itemprop="offers" itemscope
+                    <span class="badge badge-soft badge-sm font-semibold ml-2" itemprop="offers" itemscope
                         itemtype="https://schema.org/Offer">
                         $<span itemprop="price">{{ $product->price }}</span>
                         <meta itemprop="priceCurrency" content="USD" />
                         <link itemprop="availability" href="https://schema.org/InStock" />
                     </span>
                 @endif
-
             </header>
 
             <p class="text-xs text-base-content/70 line-clamp-2 mb-2 leading-tight" itemprop="description">
@@ -47,7 +52,7 @@
             @if ($product->variations)
                 <div class="flex gap-1 join overflow-auto">
                     @foreach ($product->variations as $variation)
-                        <button class="btn btn-xs join-item" >
+                        <button class="btn btn-xs join-item">
                             {{ $variation['name'] }} ${{ $variation['price'] }}
                         </button>
                     @endforeach
@@ -55,8 +60,19 @@
             @endif
         </div>
 
+        <!-- Hover Gradient -->
         <div
             class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-base-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div x-show="open"
+         @click="open = false"
+         class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+         x-transition.opacity>
+        <img :src="'{{ $product->getFirstMediaUrl() }}'"
+             alt="{{ $product->name }}"
+             class="max-h-[90%] max-w-[90%] rounded shadow-lg cursor-pointer" />
     </div>
 </article>

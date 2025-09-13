@@ -36,15 +36,21 @@ class ManageVariatios extends EditRecord
         return $schema->components([
             Repeater::make('variations')
                 ->schema([
-                    Select::make('name')
-                        ->options([
+                    TextInput::make('name')
+                        ->datalist([
                             'S' => 'S',
                             'M' => 'M',
                             'L' => 'L',
                             'XL' => 'XL',
+                            'Small' => 'Small',
+                            'Medium' => 'Medium',
+                            'Large' => 'Large',
+                            'XLarge' => 'XLarge',
+                            'Classic' => 'Classic',
+                            'Double' => 'Double'
+                        ])->required(),
 
-                        ])->native(false)
-                        ->required(),
+
                     TextInput::make('price')
                         ->numeric()
                         ->default(0)

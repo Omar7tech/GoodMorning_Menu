@@ -20,7 +20,7 @@
                         <div
                             class="relative min-w-14 h-14 rounded-xl overflow-hidden ring-2 ring-transparent group-hover:ring-primary group-active:ring-primary transition-all duration-200">
 
-                            <img src="{{ $category->getFirstMediaUrl() }}"
+                            <img loading="lazy" src="{{ $category->getFirstMediaUrl() }}"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200" />
 
                             <!-- Text inside image -->

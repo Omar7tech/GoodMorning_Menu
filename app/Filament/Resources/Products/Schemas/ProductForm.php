@@ -37,7 +37,7 @@ class ProductForm
                                     ->label('Product Name')
                                     ->required()
                                     ->maxLength(255)
-                                    ->placeholder('e.g., Premium Wireless Headphones')
+                                    ->placeholder('e.g., Premium Crepe')
                                     ->helperText('Choose a clear, descriptive name for your product')
                                     ->columnSpan(12)
                                     ->suffixIcon('heroicon-m-pencil')
@@ -73,7 +73,7 @@ class ProductForm
                                         name: 'category',
                                         titleAttribute: 'name',
                                     )
-                                    
+
                                     ->required()
                                     ->preload()
                                     ->searchable()

@@ -13,24 +13,58 @@ class ProductInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
+                // Product Image
                 SpatieMediaLibraryImageEntry::make('image')
                     ->size(300)
-                    ->square(),
-                TextEntry::make('description')
+                    ->square()
+                    ->label('Product Image'),
+
+                // Name
+                TextEntry::make('name')
+                    ->label('Name')
                     ->placeholder('-'),
-                IconEntry::make('active')
-                    ->boolean(),
-                IconEntry::make('featured')
-                    ->boolean(),
+
+                // Description
+                TextEntry::make('description')
+                    ->label('Description')
+                    ->placeholder('-'),
+
+                // Category
                 TextEntry::make('category.name')
-                ,
+                    ->label('Category')
+                    ->placeholder('-'),
+
+                // Price
                 TextEntry::make('price')
-                    ->money(),
+                    ->label('Price')
+                    ->money('USD', true),
+
+                // Active status
+                IconEntry::make('active')
+                    ->label('Active')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
+
+                // Featured status
+                IconEntry::make('featured')
+                    ->label('Featured')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-star')
+                    ->falseIcon('heroicon-o-star')
+                    ->trueColor('warning')
+                    ->falseColor('secondary'),
+
+                // Timestamps
                 TextEntry::make('created_at')
+                    ->label('Created At')
                     ->dateTime()
                     ->placeholder('-'),
+
                 TextEntry::make('updated_at')
+                    ->label('Updated At')
                     ->dateTime()
                     ->placeholder('-'),
             ]);
