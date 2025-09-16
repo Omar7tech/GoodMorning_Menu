@@ -2,7 +2,6 @@
 @php
     $settings = app(\App\Settings\GeneralSettings::class);
 
-    // Contact Points
     $contactPoints = [];
     $socialUrls = [];
 
@@ -34,11 +33,9 @@
         ];
     }
 
-    // Social URLs
     if ($settings->instagram_active && $settings->instagram_url) $socialUrls[] = $settings->instagram_url;
     if ($settings->facebook_active && $settings->facebook_url) $socialUrls[] = $settings->facebook_url;
 
-    // Structured Data: Business / Organization / Menu
     $businessData = [
         '@context' => 'https://schema.org',
         '@type' => ['Bakery', 'LocalBusiness', 'Restaurant', 'FoodEstablishment'],
