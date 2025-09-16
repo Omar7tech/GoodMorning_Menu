@@ -1,5 +1,5 @@
 <div class="bg-base-200 space-y-5">
-    <x-nav.main />
+    <x-nav.main :$settings />
     <div
         class="absolute top-0 z-[0] mt-16 h-screen w-screen
     bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,0,0.08)_0,rgba(255,255,0,0)_70%,rgba(255,255,0,0)_100%)]">
@@ -113,6 +113,16 @@
             </div>
         @endif
     @endforeach
-    <x-socials.flower :$settings />
+
+    <x-socials.footer :$settings />
+    @if (
+        $settings->whatsapp_active ||
+            $settings->phone_active ||
+            $settings->facebook_active ||
+            $settings->instagram_active ||
+            $settings->location_active)
+        <x-socials.flower :$settings />
+    @endif
+
     <x-footer.main />
 </div>

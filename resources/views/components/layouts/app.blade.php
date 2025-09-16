@@ -1,54 +1,116 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+@php
+    $settings = app(\App\Settings\GeneralSettings::class);
 
+    // Contact Points
+    $contactPoints = [];
+    $socialUrls = [];
+
+    if ($settings->phone_active && $settings->phone_number) {
+        $contactPoints[] = [
+            '@type' => 'ContactPoint',
+            'telephone' => $settings->phone_number,
+            'contactType' => 'customer service',
+            'availableLanguage' => ['English', 'Arabic'],
+        ];
+    }
+
+    if ($settings->whatsapp_active && $settings->whatsapp_number) {
+        $contactPoints[] = [
+            '@type' => 'ContactPoint',
+            'telephone' => $settings->whatsapp_number,
+            'contactType' => 'customer service',
+            'availableLanguage' => ['English', 'Arabic'],
+            'contactOption' => 'WhatsApp',
+        ];
+    }
+
+    if ($settings->email_active && $settings->email) {
+        $contactPoints[] = [
+            '@type' => 'ContactPoint',
+            'email' => $settings->email,
+            'contactType' => 'customer service',
+            'availableLanguage' => ['English', 'Arabic'],
+        ];
+    }
+
+    // Social URLs
+    if ($settings->instagram_active && $settings->instagram_url) $socialUrls[] = $settings->instagram_url;
+    if ($settings->facebook_active && $settings->facebook_url) $socialUrls[] = $settings->facebook_url;
+
+    // Structured Data: Business / Organization / Menu
+    $businessData = [
+        '@context' => 'https://schema.org',
+        '@type' => ['Bakery', 'LocalBusiness', 'Restaurant', 'FoodEstablishment'],
+        'name' => 'Good Morning',
+        'description' => 'Fresh desserts, drinks, and pastries served all day in Aley, Lebanon since 2011.',
+        'url' => url('/'),
+        'logo' => asset('images/GMLogo2025.png'),
+        'image' => asset('images/GMLogo2025.png'),
+        'foundingDate' => '2011',
+        'slogan' => 'Fresh with every sunrise and beyond',
+        'address' => [
+            '@type' => 'PostalAddress',
+            'addressLocality' => 'Aley',
+            'addressRegion' => 'Mount Lebanon',
+            'addressCountry' => 'LB',
+        ],
+        'areaServed' => [
+            '@type' => 'City',
+            'name' => 'Aley',
+        ],
+        'servesCuisine' => ['Desserts', 'Beverages', 'Pastries', 'Cakes', 'Fresh Juices', 'Coffee'],
+        'priceRange' => '$$',
+        'menu' => [
+            '@type' => 'Menu',
+            'name' => 'Daily Menu',
+            'description' => 'Our full menu of fresh desserts, drinks, pastries, cakes, and fresh juices.',
+        ],
+    ];
+
+    if (!empty($contactPoints)) $businessData['contactPoint'] = $contactPoints;
+    if (!empty($socialUrls)) $businessData['sameAs'] = $socialUrls;
+@endphp
+
+<html lang="en" data-theme="{{ $settings->theme ?? 'light' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <title>Good Morning | Fresh Desserts & Drinks in Aley, Lebanon</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <meta name="description"
-        content="Good Morning in Aley, Lebanon – your destination for freshly made desserts, drinks, and pastries served all day, every day since 2011. Enjoy cakes, juices, and sweet delights crafted fresh with every sunrise and beyond.">
-    <meta name="keywords"
-        content="Good Morning Aley, fresh desserts Lebanon, daily fresh drinks Aley, dessert shop Lebanon, coffee and desserts Aley, fresh juices Lebanon, cakes and pastries Aley, best desserts in Lebanon, Good Morning café Aley, freshly made desserts daily">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
 
-    <!-- Open Graph (Facebook/WhatsApp) -->
-    <meta property="og:title" content="Good Morning | Fresh Desserts & Drinks in Aley, Lebanon">
-    <meta property="og:description"
-        content="Serving Aley with freshly prepared desserts, drinks, and pastries every day since 2011. Fresh with every sunrise.">
+    <title>Good Morning Aley – Fresh Desserts, Pastries & Drinks in Lebanon</title>
+    <meta name="description" content="Fresh desserts, pastries, and drinks in Aley, Lebanon. Visit Good Morning for daily treats since 2011!">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Good Morning Aley – Fresh Desserts, Pastries & Drinks in Lebanon">
+    <meta property="og:description" content="Fresh desserts, pastries, and drinks in Aley, Lebanon. Visit Good Morning for daily treats since 2011!">
     <meta property="og:image" content="{{ asset('images/GMLogo2025.png') }}">
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Good Morning Aley">
 
+    <!-- WhatsApp / Contact -->
+    @if ($settings->whatsapp_active && $settings->whatsapp_number)
+        <meta property="wa:phone" content="{{ $settings->whatsapp_number }}">
+        <meta property="wa:contact_enabled" content="true">
+    @endif
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <style>
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
-        }
-    </style>
-
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {!! json_encode($businessData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+    </script>
 </head>
 
 <body class="poppins">
-    
     {{ $slot }}
+
     <x-footer.year />
 </body>
-
 </html>

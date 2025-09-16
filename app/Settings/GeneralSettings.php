@@ -15,6 +15,7 @@ class GeneralSettings extends Settings
     public ?string $facebook_url;
     public bool $facebook_active;
     public ?string $whatsapp_number;
+    public bool $whatsapp_number_on_top;
     public bool $whatsapp_active;
     public ?string $phone_number;
     public bool $phone_active;
@@ -22,6 +23,7 @@ class GeneralSettings extends Settings
     public bool $email_active;
     public ?string $location_url;
     public bool $location_active;
+    public ?string $theme;
 
 
     public static function group(): string

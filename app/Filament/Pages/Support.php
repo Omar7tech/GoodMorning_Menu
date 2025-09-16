@@ -8,7 +8,7 @@ class Support extends Page
 {
 
 
-protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-question-mark-circle';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-question-mark-circle';
 
     protected string $view = 'filament.pages.support';
 
