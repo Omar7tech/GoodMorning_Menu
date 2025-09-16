@@ -140,3 +140,12 @@
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+
+.category-link.active div {
+    @apply ring-primary scale-105;
+}
+.category-link.active .bg-black\/40 {
+    @apply bg-primary text-white;
+}
+
+

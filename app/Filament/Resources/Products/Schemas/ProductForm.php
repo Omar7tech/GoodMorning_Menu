@@ -149,6 +149,16 @@ class ProductForm
                                     ->offColor('gray')
                                     ->inline(false)
                                     ->columnSpan(1),
+
+                                Toggle::make('new')
+                                    ->label('🆕 New Product')
+                                    ->helperText('Mark as new arrival')
+                                    ->required()
+                                    ->default(false)
+                                    ->onColor('info')
+                                    ->offColor('gray')
+                                    ->inline(false)
+                                    ->columnSpan(1)
                             ])
                     ])
                     ->columnSpan(12)

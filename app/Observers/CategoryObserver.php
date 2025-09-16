@@ -1,5 +1,4 @@
 <?php
-// App/Observers/CategoryObserver.php
 namespace App\Observers;
 
 use App\Models\Category;

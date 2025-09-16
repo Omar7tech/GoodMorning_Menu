@@ -20,5 +20,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'goodmorning@gmail.com',
             'password' => 'goodmorning',
         ]);
+
+        $this->call([
+            CategorySeeder::class,
+            ProductSeeder::class
+        ]);
+
+
     }
 }

@@ -57,6 +57,13 @@ class ProductInfolist
                     ->trueColor('warning')
                     ->falseColor('secondary'),
 
+                IconEntry::make('new')
+                    ->label('New')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-sparkles')
+                    ->falseIcon('heroicon-o-sparkles')
+                    ->trueColor('info')
+                    ->falseColor('secondary'),
                 // Timestamps
                 TextEntry::make('created_at')
                     ->label('Created At')

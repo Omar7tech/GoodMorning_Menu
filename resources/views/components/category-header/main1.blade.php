@@ -10,7 +10,7 @@
     <div class="relative z-10 flex items-center justify-center lg:justify-start h-full px-6 lg:px-12">
         <div class="text-center lg:text-left max-w-lg">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">
-                <div class="status status-lg status-accent animate-bounce"></div>
+                <div class="status status-lg status-warning animate-bounce"></div>
                 {{ $category->name }}
             </h2>
             <p class="mt-2 text-sm sm:text-base md:text-lg text-gray-200 leading-snug">

@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->integer('sort')->default(0)->nullable();
             $table->boolean('active')->default(true);
             $table->boolean('featured')->default(false);
-            $table->foreignId('category_id')->nullable()->index()->constrained('categories', 'id')->cascadeOnDelete();
+            $table->boolean('new')->default(false);
+            $table->foreignId(column: 'category_id')->nullable()->index()->constrained('categories', 'id')->cascadeOnDelete();
             $table->decimal('price', 10, 2)->default(0);
             $table->json('variations')->nullable();
             $table->timestamps();

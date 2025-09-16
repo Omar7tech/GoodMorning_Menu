@@ -19,15 +19,25 @@
                     <a href="#{{ $category->slug }}">
                         <div
                             class="relative min-w-14 h-14 rounded-xl overflow-hidden ring-2 ring-transparent group-hover:ring-primary group-active:ring-primary transition-all duration-200">
-
-                            <img loading="lazy" src="{{ $category->getFirstMediaUrl() }}"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200" />
-
-                            <!-- Text inside image -->
-                            <div
-                                class="absolute bottom-0 inset-x-0 bg-black/40 text-[10px] text-white text-center p-1 leading-tight">
-                                {{ $category->name }}
-                            </div>
+                            @if($category->getFirstMediaUrl())
+                                <!-- With Image -->
+                                <img loading="lazy" src="{{ $category->getFirstMediaUrl() }}"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200" />
+                                <!-- Text inside image -->
+                                <div
+                                    class="absolute bottom-0 inset-x-0 bg-black/40 text-[10px] text-white text-center p-1 leading-tight">
+                                    {{ $category->name }}
+                                </div>
+                            @else
+                                <!-- Without Image - Professional Minimal -->
+                                <div class="w-full h-full flex items-center justify-center bg-base-300 border border-base-content/10 group-hover:bg-base-100 group-hover:border-base-content/20 transition-all duration-200">
+                                    <div class="text-center px-2">
+                                        <div class="text-[9px] text-base-content font-medium leading-tight">
+                                            {{ $category->name }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </a>
                 </div>

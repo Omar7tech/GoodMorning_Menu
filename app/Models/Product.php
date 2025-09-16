@@ -35,17 +35,17 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
-     protected function casts(): array
-
+    protected function casts(): array
     {
         return [
             'variations' => 'array',
             'active' => 'boolean',
             'featured' => 'boolean',
+            'new' => 'boolean'
         ];
     }
 
-     #[Scope]
+    #[Scope]
     protected function active(Builder $query): void
     {
         $query->where('active', 1);

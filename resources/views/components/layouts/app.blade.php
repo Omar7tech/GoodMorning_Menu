@@ -17,7 +17,7 @@
     <meta property="og:description"
         content="Serving Aley with freshly prepared desserts, drinks, and pastries every day since 2011. Fresh with every sunrise.">
     <meta property="og:image" content="{{ asset('images/GMLogo2025.png') }}">
-    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,12 +25,30 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    <style>
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+
 </head>
 
 <body class="poppins">
-    <x-nav.main />
+    
     {{ $slot }}
-
+    <x-footer.year />
 </body>
 
 </html>

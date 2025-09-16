@@ -63,6 +63,11 @@ class ProductsTable
                 // Featured status with star icon
                 ToggleColumn::make('featured')->sortable(),
 
+                ToggleColumn::make('new')
+                    ->label('New')
+                    ->sortable(),
+
+
                 // Created date with better formatting
                 TextColumn::make('created_at')
                     ->label('Created')
@@ -106,18 +111,27 @@ class ProductsTable
                     ->trueLabel('Featured Products')
                     ->falseLabel('Not Featured')
                     ->placeholder('All Products'),
+
+                TernaryFilter::make('new')
+                    ->label('New')
+                    ->indicator('New')
+                    ->native(false)
+                    ->trueLabel('New Products')
+                    ->falseLabel('Not New')
+                    ->placeholder('All Products'),
+
             ])
             ->actions([
 
-                    ViewAction::make()
-                        ->color('info')
-                        ->icon('heroicon-m-eye'),
-                    EditAction::make()
-                        ->color('warning')
-                    ])
+                ViewAction::make()
+                    ->color('info')
+                    ->icon('heroicon-m-eye'),
+                EditAction::make()
+                    ->color('warning')
+            ])
 
 
-            
+
             ->defaultSort('created_at', 'desc')
             ->striped()
             ->paginated([10, 25, 50])
