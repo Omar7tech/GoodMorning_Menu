@@ -78,7 +78,6 @@
     <title>Good Morning Aley – Fresh Desserts, Pastries & Drinks in Lebanon</title>
     <meta name="description" content="Fresh desserts, pastries, and drinks in Aley, Lebanon. Visit Good Morning for daily treats since 2011!">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Good Morning Aley – Fresh Desserts, Pastries & Drinks in Lebanon">
     <meta property="og:description" content="Fresh desserts, pastries, and drinks in Aley, Lebanon. Visit Good Morning for daily treats since 2011!">
     <meta property="og:image" content="{{ asset('images/GMLogo2025.png') }}">
@@ -86,20 +85,17 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Good Morning Aley">
 
-    <!-- WhatsApp / Contact -->
     @if ($settings->whatsapp_active && $settings->whatsapp_number)
         <meta property="wa:phone" content="{{ $settings->whatsapp_number }}">
         <meta property="wa:contact_enabled" content="true">
     @endif
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {!! json_encode($businessData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
     </script>
