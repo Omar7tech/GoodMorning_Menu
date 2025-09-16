@@ -6,8 +6,8 @@ return new class extends SettingsMigration {
     public function up(): void
     {
         $this->migrator->add('general.site_active', true);
-        $this->migrator->add('general.featured_show', true);
-        $this->migrator->add('general.new_show', true);
+        $this->migrator->add('general.featured_show', false);
+        $this->migrator->add('general.new_show', false);
         $this->migrator->add('general.instagram_url', 'https://www.instagram.com/');
         $this->migrator->add('general.instagram_active', false);
         $this->migrator->add('general.facebook_url', 'https://www.facebook.com/');

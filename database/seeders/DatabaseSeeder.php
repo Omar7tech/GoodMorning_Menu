@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
             'password' => 'goodmorning',
         ]);
 
-        $this->call([
+        /* $this->call([
             CategorySeeder::class,
             ProductSeeder::class
-        ]);
+        ]); */
 
 
     }
